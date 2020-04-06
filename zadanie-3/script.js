@@ -42,6 +42,7 @@ const calcTimeLeftInSeconds = () => {
 const formatTime = secondsLeft => {
   if (secondsLeft && typeof secondsLeft === 'number' && secondsLeft >= 0) {
 
+    const secs = Math.floor(secondsLeft % 60);
     const mins = Math.floor((secondsLeft / 60) % 60);
     const hours = Math.floor((secondsLeft / 3600) % 24);
     const days = Math.floor((secondsLeft / 3600) / 24);
@@ -49,16 +50,16 @@ const formatTime = secondsLeft => {
     // add zero if one digit result
     // check if days or hours are 0
     if (days == '0' && hours != '0') {
-      const final = [hours, mins].map((element) =>
+      const final = [hours, mins, secs].map((element) =>
         `${element + 100}`.substring(1)
       );
       return final.join('-');
     } else if (days == '0' && hours == '0') {
-      const final = [mins].map((element) => 
+      const final = [mins, secs].map((element) => 
         `${element + 100}`.substring(1));
       return final.join('-');
     } else {
-      const final = [days, hours, mins].map((element) =>
+      const final = [days, hours, mins, secs].map((element) =>
         `${element + 100}`.substring(1)
       );
       return final.join('-');
@@ -73,11 +74,17 @@ let counter = calcTimeLeftInSeconds();
 
 // render start counter
 const demo = document.querySelector('.demo');
-demo.innerHTML = `Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter)}</strong>`;
+demo.innerHTML = `
+  <p>Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter).slice(0, -3)}</strong></p>
+  <p>Do końca pozostało (DD-HH-MM-SS): <strong>${formatTime(counter-1)}</strong></p>
+`;
 
 // rerender counter using setInterval
 const promotionCountdown = setInterval(() => {
-  demo.innerHTML = `Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter-1)}</strong>`;
+  demo.innerHTML = `
+    <p>Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter).slice(0, -3)}</strong></p>
+    <p>Do końca pozostało (DD-HH-MM-SS): <strong>${formatTime(counter-1)}</strong></p>
+  `;
   counter--;
   if (counter === 0) {
     demo.innerHTML = 'Koniec promocji!';
