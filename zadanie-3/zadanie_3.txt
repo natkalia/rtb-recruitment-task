@@ -1,0 +1,5 @@
+Zadanie 3.
+
+Zaprogramuj counter, który zlicza ilość czasu pozostałego np. do końca promocji (od dnia dzisiejszego do analogicznej daty tydzień później) w formie "Do końca pozostało: DD-HH-MM".
+
+Dodaj warunki, które wyłączą ilość dni/godzin w momencie kiedy wynoszą 0.

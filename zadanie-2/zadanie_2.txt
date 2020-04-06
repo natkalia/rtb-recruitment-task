@@ -1,0 +1,8 @@
+Zadanie 2
+
+Stwórz banner w formacie 160x600. Wylosuj z pliku JSON trzy oferty. Układ bannera ma być taki jak na załączonym przykładzie (banner.jpg). 
+
+Banner powinien być w formie slidera. 
+
+Dane powinny być zaczytywane z pliku JSON: http://rekrutacjartb.pl/developer/banner.json
+Logo: http://rekrutacjartb.pl/developer/images/logo_rtb.png

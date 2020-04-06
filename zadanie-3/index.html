@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 3 - counter</title>
+</head>
+<body>
+  <header>
+    <h1>Zadanie 3 - counter</h1>
+    <h2>Treść zadania:</h2>
+      <p>Zaprogramuj counter, który zlicza ilość czasu pozostałego 
+      np. do końca promocji (od dnia dzisiejszego do analogicznej daty 
+      tydzień później) w formie "Do końca pozostało: DD-HH-MM".</p>
+      <p>Dodaj warunki, które wyłączą ilość dni/godzin w momencie kiedy wynoszą 0.</p>
+  </header>
+  <section>
+    <h2>Rozwiązanie:</h2>
+    <h3>Dodatkowo założyłam, że:</h3>
+    <ol>
+      <li>Czas pozostały do końca promocji obliczany i podawany wg czasu UTC tak, aby wynik był taki 
+      sam niezależnie od czasu przeglądarki użytkownika.</li>
+      <li>Czas promocji liczony jest od północy do północy.</li>
+      <li>Licznik ma uwzględniać aktualny czas z dnia, w którym rozpoczęto odliczanie, 
+      więc odejmuje czas, który upłynął od północy dnia bieżącego do chwili bieżącej.</li>
+    </ol>
+  </section>
+  <main class="demo"></main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 2 - banner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <h1>Zadanie 2 - banner</h1>
+    <p>Stwórz banner w formacie 160x600.</p>
+    <p>Wylosuj z pliku JSON trzy oferty.</p>
+    <p>Układ bannera ma być taki jak na załączonym przykładzie (banner.jpg). </p>
+    <p>Banner powinien być w formie slidera.</p>
+    <p>Dane powinny być zaczytywane z pliku JSON: 
+      <a href="http://rekrutacjartb.pl/developer/banner.json">
+        link do pliku JSON
+      </a>
+    </p>
+    <p>Logo: 
+      <a href="http://rekrutacjartb.pl/developer/images/logo_rtb.png">
+        link do logo RTB House
+      </a>
+    </p>
+  </header>
+
+  <main class="wrapper">
+    <div class="slider">
+      <span class="close" title="click to close"></span>
+    </div>
+    <div class="logo-box">
+      <img class="logo" src="http://rekrutacjartb.pl/developer/images/logo_rtb.png"/>
+    </div>
+    <span class="menu" title="click for menu"></span>
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
