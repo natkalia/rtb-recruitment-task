@@ -1,83 +1,74 @@
 'use strict';
 
 const calcTimeLeftInSeconds = () => {
+  // get user browser time in date format
+  const currentTime = new Date();
 
-  // get user browser time
-  const today = new Date();
-
-  // get user UTC time
-  const currentTime = new Date(
-    Date.UTC(
-      today.getUTCFullYear(),
-      today.getUTCMonth(),
-      today.getUTCDate(),
-      today.getUTCHours(),
-      today.getUTCMinutes(),
-      today.getUTCSeconds()
-    )
-  );
-
-// get UTC time for the start of promo - today at midnight
+  // get UTC time in date format 
+  // for the start of promo - today at midnight
   const currentPromoStart = new Date(
     Date.UTC(
-      today.getUTCFullYear(),
-      today.getUTCMonth(),
-      today.getUTCDate(),
-      0,
-      0,
-      0
+      currentTime.getUTCFullYear(),
+      currentTime.getUTCMonth(),
+      currentTime.getUTCDate(),
+      0, 0, 0
     )
   );
 
-  // get time for the end of promo - 7 days from today midnight to another midnight
+  // get UTC time in date format  
+  // for the end of promo - 7 days from today midnight to another midnight
   const currentPromoEnd = new Date(
     Date.UTC(
       currentPromoStart.getUTCFullYear(),
       currentPromoStart.getUTCMonth(),
       currentPromoStart.getUTCDate() + 7,
-      0,
-      0,
-      0
+      0, 0, 0
     )
   );
 
   // get time left from midnight to midnight (full 7 days)
-  let timeLeft = Math.round((currentPromoEnd.getTime() - currentPromoStart.getTime()) / 1000);
-  // substract part of today that already lapsed
+  // convert miliseconds to seconds
+  let timeLeft = Math.round(
+    (currentPromoEnd.getTime() - currentPromoStart.getTime()) / 1000
+  );
+  // substract (mili)seconds representing part of today that already lapsed
+  // convert miliseconds to seconds
   timeLeft = timeLeft - (currentTime.getTime() - currentPromoStart.getTime()) / 1000;
+
+  // return timeLeft in seconds
   return timeLeft;
 };
 
 const formatTime = secondsLeft => {
   if (secondsLeft && typeof secondsLeft === 'number' && secondsLeft >= 0) {
 
-    const seconds = Math.floor(secondsLeft % 60);
     const mins = Math.floor((secondsLeft / 60) % 60);
     const hours = Math.floor((secondsLeft / 3600) % 24);
-    const days = Math.floor(secondsLeft / 3600 / 24);
+    const days = Math.floor((secondsLeft / 3600) / 24);
 
+    // add zero if one digit result
+    // check if days or hours are 0
     if (days == '0' && hours != '0') {
-      const final = [hours, mins, seconds].map((element) =>
-        `${element + 100}`.substring(1)
-      ); 
-      return final.join('-');
-    } else if (days == '0' && hours == '0') {
-      const final = [mins, seconds].map((element) =>
+      const final = [hours, mins].map((element) =>
         `${element + 100}`.substring(1)
       );
       return final.join('-');
+    } else if (days == '0' && hours == '0') {
+      const final = [mins].map((element) => 
+        `${element + 100}`.substring(1));
+      return final.join('-');
     } else {
-      const final = [days, hours, mins, seconds].map((element) =>
+      const final = [days, hours, mins].map((element) =>
         `${element + 100}`.substring(1)
       );
       return final.join('-');
     }
-
   } else {
     return null;
   }
 };
 
+// calculate timeLeft in seconds to be rendered
 let counter = calcTimeLeftInSeconds();
 
 // render start counter
@@ -86,10 +77,10 @@ demo.innerHTML = `Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter)
 
 // rerender counter using setInterval
 const promotionCountdown = setInterval(() => {
-  demo.innerHTML = `Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter)}</strong>`;
+  demo.innerHTML = `Do końca pozostało (DD-HH-MM): <strong>${formatTime(counter-1)}</strong>`;
   counter--;
-  if (counter === -1) {
-    demo.innerHTML = 'End of promo time!';
+  if (counter === 0) {
+    demo.innerHTML = 'Koniec promocji!';
     clearInterval(promotionCountdown);
   }
-}, 1000); //TODO: in final version change to minutes
+}, 1000);
